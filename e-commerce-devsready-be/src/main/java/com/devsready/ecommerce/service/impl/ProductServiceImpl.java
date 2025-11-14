@@ -8,6 +8,7 @@ import com.devsready.ecommerce.exception.ResourceNotFoundException;
 import com.devsready.ecommerce.mapper.ProductMapper;
 import com.devsready.ecommerce.repository.ProductRepository;
 import com.devsready.ecommerce.service.ProductService;
+import com.devsready.ecommerce.specification.ProductSpecs;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.transaction.Transactional;
@@ -86,29 +87,32 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(Transactional.TxType.SUPPORTS)
     public List<ProductResponseDTO> getAll(String nameLike, Double minPrice, Double maxPrice) {
-        var spec = (Specification<Product>) (root, query, cb) -> {
-            List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
+//        Specification<Product> spec = (root, query, cb) -> {
+//            List<Predicate> predicates = new ArrayList<>();
+//
+//            if (nameLike != null && !nameLike.trim().isEmpty()) {
+//                String pattern = "%" + nameLike.trim().toLowerCase() + "%";
+//                predicates.add(cb.like(cb.lower(root.get("name")), pattern));
+//            }
+//
+//            if (minPrice != null) {
+//                predicates.add(cb.greaterThanOrEqualTo(root.get("price"), minPrice));
+//            }
+//
+//            if (maxPrice != null) {
+//                predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+//            }
+//
+//            return cb.and(predicates.toArray(new Predicate[0]));
+//        };
 
-            if (nameLike != null && !nameLike.trim().isEmpty()) {
-                String pattern = "%" + nameLike.trim().toLowerCase() + "%";
-                predicates.add(cb.like(cb.lower(root.get("name")), pattern));
-            }
+        Specification<Product> spec = ProductSpecs.nameLike(nameLike)
+                .and(ProductSpecs.minPrice(minPrice))
+                .and(ProductSpecs.maxPrice(maxPrice));
 
-            if (minPrice != null && maxPrice != null) {
-                predicates.add(cb.between(root.get("price"), minPrice, maxPrice));
-            } else if (minPrice != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("price"), minPrice));
-            } else if (maxPrice != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxPrice));
-            }
-
-            return cb.and(predicates.toArray(new Predicate[0]));
-        };
-
-        List<Product> results = productRepository.findAll(spec);
-        return results.stream()
+        return productRepository.findAll(spec).stream()
                 .map(productMapper::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private void patchProduct(ProductRequestDTO partialDto, Product existing) {

@@ -14,9 +14,9 @@ public class ProductRequestDTO {
     private String category;
     private String subcategory;
     private String sellerName;
-    @NotNull @PositiveOrZero
+    @NotNull @Positive
     private Double price;
-    @NotNull @Min(0)
+    @NotNull @PositiveOrZero
     private Integer quantity;
 }
 

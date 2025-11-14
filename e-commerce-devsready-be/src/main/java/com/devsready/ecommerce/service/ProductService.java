@@ -1,7 +1,5 @@
 package com.devsready.ecommerce.service;
 
-
-
 import com.devsready.ecommerce.dto.ProductRequestDTO;
 import com.devsready.ecommerce.dto.ProductResponseDTO;
 

@@ -29,8 +29,8 @@ public interface ProductController {
     @GetMapping
     ResponseEntity<List<ProductResponseDTO>> getAll(
             @Parameter(description = "Name filter") @RequestParam(required = false) String name,
-            @Parameter(description = "Minimum price") @RequestParam(required = false) Double minPrice,
-            @Parameter(description = "Maximum price") @RequestParam(required = false) Double maxPrice
+            @Parameter(description = "Minimum price filter") @RequestParam(required = false) Double minPrice,
+            @Parameter(description = "Maximum price filter") @RequestParam(required = false) Double maxPrice
     );
 
     @Operation(summary = "Get product by id")
@@ -57,7 +57,7 @@ public interface ProductController {
     );
 
     @Operation(summary = "Patch product")
-    @ApiResponse(responseCode = "200", description = "Product partialy updated")
+    @ApiResponse(responseCode = "200", description = "Product partially updated")
     @ApiResponse(responseCode = "404", description = "Product not found")
     @PatchMapping("/{id}")
     ResponseEntity<ProductResponseDTO> patch(
