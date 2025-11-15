@@ -8,6 +8,26 @@ export interface ProductFilters {
   maxPrice?: number;
 }
 
+export interface FieldError {
+  field: string;
+  message: string;
+}
+
+export interface ValidationErrorResponse {
+  errors: FieldError[];
+}
+
+async function handleResponse<T>(res: Response): Promise<T> {
+  const data = await res.json();
+  if (!res.ok) {
+    if (data.errors && Array.isArray(data.errors)) {
+      throw data as ValidationErrorResponse;
+    }
+    throw new Error(data.message || "Something went wrong");
+  }
+  return data;
+}
+
 export async function getAllProducts(filters?: ProductFilters): Promise<Product[]> {
   const query = new URLSearchParams();
 
@@ -31,7 +51,8 @@ export async function createProduct(product: Partial<Product>): Promise<Product>
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(product),
   });
-  return res.json();
+  // return res.json();
+  return handleResponse<Product>(res);
 }
 
 export async function updateProduct(id: number, product: Partial<Product>): Promise<Product> {

@@ -7,31 +7,31 @@ const ProductListPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-const [filters, setFilters] = useState<{
-  nameLike?: string;
-  minPrice?: number;
-  maxPrice?: number;
-}>({});
+  const [filters, setFilters] = useState<{
+    nameLike?: string;
+    minPrice?: number;
+    maxPrice?: number;
+  }>({});
 
   useEffect(() => {
     loadProducts();
   }, []);
 
   async function loadProducts(filters?: { nameLike?: string; minPrice?: number; maxPrice?: number }) {
-  setLoading(true);
-  try {
-    const data = await getAllProducts({
-      nameLike: filters?.nameLike,
-      minPrice: filters?.minPrice,
-      maxPrice: filters?.maxPrice,
-    });
-    setProducts(data);
-  } catch (err) {
-    console.error("Error fetching products", err);
-  } finally {
-    setLoading(false);
+    setLoading(true);
+    try {
+      const data = await getAllProducts({
+        nameLike: filters?.nameLike,
+        minPrice: filters?.minPrice,
+        maxPrice: filters?.maxPrice,
+      });
+      setProducts(data);
+    } catch (err) {
+      console.error("Error fetching products", err);
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
   const handleDelete = async (id: number) => {
     await deleteProduct(id);
@@ -47,7 +47,6 @@ const [filters, setFilters] = useState<{
 
   return (
     <div className="container mx-auto p-6">
-      {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6">
         <h1 className="text-3xl font-extrabold text-purple-700 mb-4 md:mb-0">
           Products
@@ -59,55 +58,51 @@ const [filters, setFilters] = useState<{
         </Link>
       </div>
 
-      {/* Empty state */}
+      <div className="flex flex-wrap md:flex-row items-center gap-4 my-4">
+        <div>Filter by:</div>
+        <input
+          type="text"
+          placeholder="Name"
+          value={filters.nameLike || ""}
+          onChange={(e) => setFilters({ ...filters, nameLike: e.target.value })}
+          className="border px-3 py-2 rounded flex-1 min-w-[80px] max-w-[100px]"
+        />
+        <input
+          type="number"
+          placeholder="Min Price"
+          value={filters.minPrice ?? ""}
+          onChange={(e) =>
+            setFilters({ ...filters, minPrice: e.target.value ? parseFloat(e.target.value) : undefined })
+          }
+          className="border px-3 py-2 rounded flex-1 min-w-[80px] max-w-[100px]"
+        />
+        <input
+          type="number"
+          placeholder="Max Price"
+          value={filters.maxPrice ?? ""}
+          onChange={(e) =>
+            setFilters({ ...filters, maxPrice: e.target.value ? parseFloat(e.target.value) : undefined })
+          }
+          className="border px-3 py-2 rounded flex-1 min-w-[80px] max-w-[100px]"
+        />
 
-<div className="flex flex-wrap md:flex-row items-center gap-4 my-4">
-  <div>Filter by:</div>
-  <input
-    type="text"
-    placeholder="Name"
-    value={filters.nameLike || ""}
-    onChange={(e) => setFilters({ ...filters, nameLike: e.target.value })}
-    className="border px-3 py-2 rounded flex-1 min-w-[80px] max-w-[100px]"
-  />
-  <input
-    type="number"
-    placeholder="Min Price"
-    value={filters.minPrice ?? ""}
-    onChange={(e) =>
-      setFilters({ ...filters, minPrice: e.target.value ? parseFloat(e.target.value) : undefined })
-    }
-    className="border px-3 py-2 rounded flex-1 min-w-[80px] max-w-[100px]"
-  />
-  <input
-    type="number"
-    placeholder="Max Price"
-    value={filters.maxPrice ?? ""}
-    onChange={(e) =>
-      setFilters({ ...filters, maxPrice: e.target.value ? parseFloat(e.target.value) : undefined })
-    }
-    className="border px-3 py-2 rounded flex-1 min-w-[80px] max-w-[100px]"
-  />
-  
-  {/* Buton de filtrare */}
-  <button
-    onClick={() => loadProducts(filters)}
-    className="bg-purple-600 text-white px-5 py-2 rounded-lg shadow hover:bg-purple-700 transition"
-  >
-    Apply Filter
-  </button>
+        <button
+          onClick={() => loadProducts(filters)}
+          className="bg-purple-600 text-white px-5 py-2 rounded-lg shadow hover:bg-purple-700 transition"
+        >
+          Apply Filter
+        </button>
 
-  {/* Buton de reset */}
-  <button
-    onClick={() => {
-      setFilters({});
-      loadProducts({});
-    }}
-    className="bg-gray-400 text-white px-5 py-2 rounded-lg shadow hover:bg-gray-500 transition"
-  >
-    Remove Filters
-  </button>
-</div>
+        <button
+          onClick={() => {
+            setFilters({});
+            loadProducts({});
+          }}
+          className="bg-gray-400 text-white px-5 py-2 rounded-lg shadow hover:bg-gray-500 transition"
+        >
+          Remove Filters
+        </button>
+      </div>
 
       {products.length === 0 ? (
         <p className="text-gray-500 text-center py-10 text-lg">
@@ -125,7 +120,7 @@ const [filters, setFilters] = useState<{
                 <th className="px-6 py-3 text-purple-900 font-semibold">Seller Name</th>
                 <th className="px-6 py-3 text-purple-900 font-semibold">Price</th>
                 <th className="px-6 py-3 text-purple-900 font-semibold">Quantity</th>
-                 <th className="px-6 py-3 text-purple-900 font-semibold">Options</th>
+                <th className="px-6 py-3 text-purple-900 font-semibold">Options</th>
               </tr>
             </thead>
 
@@ -140,11 +135,15 @@ const [filters, setFilters] = useState<{
                   <td className="px-6 py-4">{p.category}</td>
                   <td className="px-6 py-4">{p.subcategory}</td>
                   <td className="px-6 py-4">{p.sellerName}</td>
-                  <td className="px-6 py-4 font-semibold text-purple-700">${p.price}</td>
-                  <td className="px-6 py-4 font-semibold text-purple-700">${p.quantity}</td>
+                  <td className="px-6 py-4 font-semibold text-purple-700">{p.price} Lei</td>
+                  <td className="px-6 py-4 font-semibold text-purple-700">{p.quantity}</td>
                   <td className="px-6 py-4 flex gap-2">
-                    <Link to={`/products/${p.id}/edit`}>
-                      <button className="bg-yellow-400 text-white px-3 py-1 rounded shadow hover:bg-yellow-500 transition">
+                    <Link to="#">
+                      <button
+                        className="bg-yellow-400 text-white px-3 py-1 rounded shadow hover:bg-yellow-500 transition cursor-not-allowed"
+                        title="Not implemented yet"
+                        disabled
+                      >
                         Edit
                       </button>
                     </Link>

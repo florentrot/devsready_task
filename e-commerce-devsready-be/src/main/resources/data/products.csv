@@ -1,0 +1,11 @@
+id,category,created_at,description,name,price,quantity,seller_name,subcategory,updated_at
+1,Electronics,2025-11-15 10:01:00,"Wireless Bluetooth headphones","AirSound X200",199.99,45,"TechStore","Audio",2025-11-15 10:01:00
+2,Electronics,2025-11-15 10:02:00,"Smartphone with OLED display","NovaPhone Z5",899.50,30,"GadgetWorld","Phones",2025-11-15 10:02:00
+3,Fashion,2025-11-15 10:03:00,"Men's cotton hoodie","Urban Hoodie Grey",49.90,120,"StyleHub","Clothing",2025-11-15 10:03:00
+4,Fashion,2025-11-15 10:04:00,"Women's sport shoes","Runner Breeze",89.99,75,"StyleHub","Shoes",2025-11-15 10:04:00
+5,Home & Kitchen,2025-11-15 10:05:00,"Stainless steel frying pan","ChefPro 28cm",34.99,60,"CasaMag","Cookware",2025-11-15 10:05:00
+6,Home & Kitchen,2025-11-15 10:06:00,"Essential oil diffuser","AromaRelax Mini",24.50,85,"CasaMag","Home Decor",2025-11-15 10:06:00
+7,Books,2025-11-15 10:07:00,"Personal growth and mindset book","Rise Above",17.25,200,"BookLand","Self-help",2025-11-15 10:07:00
+8,Books,2025-11-15 10:08:00,"Sci-Fi novel with cyberpunk theme","Neon Horizon",22.90,150,"BookLand","Fiction",2025-11-15 10:08:00
+9,Beauty,2025-11-15 10:09:00,"Face hydration cream","HydraGlow Plus",29.99,95,"BeautyZone","Skincare",2025-11-15 10:09:00
+10,Sports,2025-11-15 10:10:00,"Yoga exercise mat","FlexBalance Pro",39.49,110,"ActiveLife","Fitness",2025-11-15 10:10:00
