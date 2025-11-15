@@ -1,5 +1,6 @@
 # Ecommerce App Setup
-![alt text](image-1.png)
+
+<img width="975" height="529" alt="image-1" src="https://github.com/user-attachments/assets/fd68afd8-3d84-496d-9e4f-a802aa31db62" />
 
 ## Versions
 - **JDK:** 17  
@@ -23,7 +24,9 @@ FLUSH PRIVILEGES;
 ---
 
 ## 2. Backend (Spring Boot) Setup**
-![alt text](image-2.png)
+
+<img width="975" height="502" alt="image-2" src="https://github.com/user-attachments/assets/0cbf2532-94a5-4cdf-b658-8a43d75c8639" />
+
 **VM Options**:
 ```bash
 -Dspring.datasource.username=ecommerce_app
@@ -53,7 +56,7 @@ npm install
 
 **Stept 3: Check if node_modules appear in the project**
 
-![alt text](image-4.png)
+<img width="303" height="83" alt="image-4" src="https://github.com/user-attachments/assets/60f3e1c0-55f5-426b-84ec-e14764473e32" />
 
 **Step 4: Start the application:**
 ```bash
@@ -61,7 +64,7 @@ npm run dev
 ```
 *You should see something like this in terminal*
 
-![alt text](image-3.png)
+<img width="456" height="195" alt="image-3" src="https://github.com/user-attachments/assets/66d67b14-6aa0-46c8-ab2a-80415efc74ff" />
 
 **Step 5: Open application in browser**:
 Test the application
