@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
-import { getAllProducts, deleteProduct } from "../services/productService";
+import { getAllProducts, deleteProduct } from "../services/ProductService";
 import { Link } from "react-router-dom";
 
-const ProductListPage: React.FC = () => {
+const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -165,4 +165,4 @@ const ProductListPage: React.FC = () => {
   );
 };
 
-export default ProductListPage;
+export default ProductList;

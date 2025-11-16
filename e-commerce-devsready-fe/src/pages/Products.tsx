@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import type { Product } from "../types/Product";
 import ProductList from "../components/ProductList";
 import ProductFilters from "../components/ProductFilters";
-import { getAllProducts, deleteProduct } from "../services/productService";
+import { getAllProducts, deleteProduct } from "../services/ProductService";
 import { Link } from "react-router-dom";
 
-const ProductsPage: React.FC = () => {
+const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   const loadProducts = (filters?: any) => {
@@ -32,4 +32,4 @@ const ProductsPage: React.FC = () => {
   );
 };
 
-export default ProductsPage;
+export default Products;

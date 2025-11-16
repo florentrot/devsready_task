@@ -1,19 +1,11 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import ProductListPage from "./pages/ProductListPage";
-import CreateProductPage from "./pages/CreateProductPage";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
 
-const App: React.FC = () => {
+const App = () => {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/products" />} />
-          <Route path="/products" element={<ProductListPage />} />
-          <Route path="/products/new" element={<CreateProductPage />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 };
 

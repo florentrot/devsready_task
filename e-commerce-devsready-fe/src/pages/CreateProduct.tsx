@@ -1,26 +1,21 @@
 import React from "react";
 import ProductForm from "../components/ProductForm";
-import { createProduct } from "../services/productService";
+import { createProduct } from "../services/ProductService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import type { Product } from "../types/Product";
+import { apiWrapper } from "../api/apiWrapper";
 
-const CreateProductPage: React.FC = () => {
+const CreateProduct: React.FC = () => {
 
   const handleSubmit = async (values: Partial<Product>) => {
-    try {
-      await createProduct(values);
-      toast.success("Product created successfully!");
-    } catch (error: any) {
-      if (error.errors && Array.isArray(error.errors)) {
-        error.errors.forEach((err: any) => {
-          toast.error(`${err.field}: ${err.message}`);
-        });
-      } else {
-        toast.error(error.message || "Something went wrong");
-      }
-    }
+    const res = await apiWrapper(createProduct(values));
+
+    if (!res) return;
+
+    toast.success("Product created successfully!");
   };
+
 
   return (
     <div className="max-w-lg mx-auto p-4">
@@ -32,4 +27,4 @@ const CreateProductPage: React.FC = () => {
   );
 };
 
-export default CreateProductPage;
+export default CreateProduct;

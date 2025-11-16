@@ -40,7 +40,6 @@ const ProductForm: React.FC<Props> = ({ initial = {}, onSubmit }) => {
     setQuantity(0);
   };
 
-
   return (
     <form
       onSubmit={handleSubmit}
